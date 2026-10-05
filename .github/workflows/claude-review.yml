@@ -1,5 +1,5 @@
 # Reusable PR review by Claude. Called from each repo's .github/workflows/claude-review.yml.
-# Triggered when a PR is opened / marked ready, or when the @OpenMind-SI/claude team is requested as reviewer.
+# Triggered when a PR is opened / marked ready, or when the @OpenMind-SI/claude-review team is requested as reviewer.
 name: Claude Review
 
 on:
@@ -47,7 +47,7 @@ jobs:
           claude_args: |
             --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Read,Grep,Glob"
 
-      # Clear the pending team request so the PR doesn't show "claude" as still awaiting review.
+      # Clear the pending team request so the PR doesn't show "claude-review" as still awaiting review.
       - name: Clear review request
         if: always()
         continue-on-error: true
@@ -55,4 +55,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh api -X DELETE "repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/requested_reviewers" \
-            -f 'team_reviewers[]=claude'
+            -f 'team_reviewers[]=claude-review'
