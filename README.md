@@ -21,7 +21,7 @@ jobs:
       github.event.pull_request.head.repo.full_name == github.repository &&
       (github.event.action != 'review_requested' ||
        github.event.requested_team.slug == 'claude-review')
-    uses: OpenMind-SI/.github/.github/workflows/claude-review.yml@<full-commit-sha>
+    uses: OpenMind-SI/shared-workflows/.github/workflows/claude-review.yml@<full-commit-sha>
     secrets:
       CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
     permissions:
