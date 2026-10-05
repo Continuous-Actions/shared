@@ -1,5 +1,5 @@
 # Reusable PR review by Claude. Called from each repo's .github/workflows/claude-review.yml.
-# Triggered when a PR is opened / marked ready, or when the @OpenMind-SI/claude-review team is requested as reviewer.
+# Triggered when a PR (draft or not) is opened, marked ready or pushed to, or when the @OpenMind-SI/claude-review team is requested as reviewer.
 name: Claude Review
 
 on:

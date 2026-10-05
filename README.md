@@ -10,14 +10,14 @@ To enable in a repo, add `.github/workflows/claude-review.yml`:
 name: Claude Review
 on:
   pull_request:
-    types: [opened, ready_for_review, review_requested]
+    types: [opened, ready_for_review, synchronize, review_requested]
 concurrency:
   group: claude-review-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 jobs:
   review:
     if: >-
-      (github.event.action != 'review_requested' && !github.event.pull_request.draft) ||
+      github.event.action != 'review_requested' ||
       (github.event.action == 'review_requested' && github.event.requested_team.slug == 'claude-review')
     uses: OpenMind-SI/.github/.github/workflows/claude-review.yml@main
     secrets: inherit
