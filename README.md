@@ -16,6 +16,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   review:
+    name: Claude
     if: >-
       github.event.pull_request.head.repo.full_name == github.repository &&
       (github.event.action != 'review_requested' ||
