@@ -44,10 +44,13 @@ jobs:
 
             Follow any conventions in CLAUDE.md / AGENTS.md if present.
             Post specific issues as inline comments with `mcp__github_inline_comment__create_inline_comment`.
-            Finish with one top-level summary via `gh pr comment`: a short verdict and the most important findings.
+            Finish by submitting exactly one review with `gh pr review` and a short summary body of the most important findings:
+            - `gh pr review ${{ github.event.pull_request.number }} --approve --body "..."` if there are no blocking issues.
+            - `gh pr review ${{ github.event.pull_request.number }} --request-changes --body "..."` if there are correctness bugs, security issues or other problems that must be fixed before merging.
+            - `gh pr review ${{ github.event.pull_request.number }} --comment --body "..."` only if you cannot reach a verdict (e.g. the PR is a draft that is clearly incomplete).
             Be concise. Do not comment on things that are fine.
           claude_args: |
-            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Read,Grep,Glob"
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr review:*),Bash(gh pr diff:*),Bash(gh pr view:*),Read,Grep,Glob"
 
       # Clear the pending team request so the PR doesn't show "claude-review" as still awaiting review.
       - name: Clear review request
