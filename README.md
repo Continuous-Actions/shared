@@ -1,4 +1,4 @@
-# OpenMind-SI shared workflows
+# OpenMind-SI shared
 
 ## Claude review
 
@@ -7,7 +7,7 @@
 To enable in a repo, add `.github/workflows/claude-review.yml`:
 
 ```yaml
-name: CI
+name: Claude CI
 on:
   pull_request:
     types: [opened, ready_for_review, synchronize, review_requested]
@@ -21,9 +21,11 @@ jobs:
       github.event.pull_request.head.repo.full_name == github.repository &&
       (github.event.action != 'review_requested' ||
        github.event.requested_team.slug == 'claude-review')
-    uses: OpenMind-SI/.github/.github/workflows/claude-review.yml@<full-commit-sha>
-    secrets: inherit
+    uses: OpenMind-SI/shared/.github/workflows/claude-review.yml@<full-commit-sha>
+    secrets:
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
     permissions:
+      actions: read
       contents: read
       pull-requests: write
       issues: write
