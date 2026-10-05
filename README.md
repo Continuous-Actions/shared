@@ -7,7 +7,7 @@
 To enable in a repo, add `.github/workflows/claude-review.yml`:
 
 ```yaml
-name: CI
+name: Claude CI
 on:
   pull_request:
     types: [opened, ready_for_review, synchronize, review_requested]
