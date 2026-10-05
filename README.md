@@ -20,7 +20,7 @@ jobs:
       github.event.pull_request.head.repo.full_name == github.repository &&
       (github.event.action != 'review_requested' ||
        github.event.requested_team.slug == 'claude-review')
-    uses: OpenMind-SI/.github/.github/workflows/claude-review.yml@main
+    uses: OpenMind-SI/.github/.github/workflows/claude-review.yml@<full-commit-sha>
     secrets: inherit
     permissions:
       contents: read
@@ -29,5 +29,5 @@ jobs:
       id-token: write
 ```
 
-and give the `claude-review` team read access to the repo so it appears in the Reviewers list.
+Pin `<full-commit-sha>` to the latest commit of this repo, and give the `claude-review` team read access to the repo so it appears in the Reviewers list.
 Requires the org secret `CLAUDE_CODE_OAUTH_TOKEN` and the Claude GitHub App installed on the repo.
