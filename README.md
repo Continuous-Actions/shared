@@ -22,8 +22,10 @@ jobs:
       (github.event.action != 'review_requested' ||
        github.event.requested_team.slug == 'claude-review')
     uses: OpenMind-SI/.github/.github/workflows/claude-review.yml@<full-commit-sha>
-    secrets: inherit
+    secrets:
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
     permissions:
+      actions: read
       contents: read
       pull-requests: write
       issues: write
