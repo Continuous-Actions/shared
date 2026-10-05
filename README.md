@@ -7,7 +7,7 @@
 To enable in a repo, add `.github/workflows/claude-review.yml`:
 
 ```yaml
-name: CI | Review PR
+name: CI
 on:
   pull_request:
     types: [opened, ready_for_review, synchronize, review_requested]
@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   review:
-    name: Claude
+    name: claude
     if: >-
       github.event.pull_request.head.repo.full_name == github.repository &&
       (github.event.action != 'review_requested' ||
