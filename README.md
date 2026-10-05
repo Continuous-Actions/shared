@@ -16,9 +16,11 @@ concurrency:
   cancel-in-progress: true
 jobs:
   review:
+    # Never run for PRs from forks.
     if: >-
-      github.event.action != 'review_requested' ||
-      (github.event.action == 'review_requested' && github.event.requested_team.slug == 'claude-review')
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      (github.event.action != 'review_requested' ||
+       github.event.requested_team.slug == 'claude-review')
     uses: OpenMind-SI/.github/.github/workflows/claude-review.yml@main
     secrets: inherit
     permissions:
