@@ -1,5 +1,5 @@
 # Reusable PR review by Claude. Called from each repo's .github/workflows/claude-review.yml.
-# Triggered when a PR (draft or not) is opened, marked ready or pushed to, or when the @Continuous-Actions/claude-review team is requested as reviewer.
+# Triggered when a PR (draft or not) is opened, marked ready or pushed to, or when the @continuous-actions/claude-review team is requested as reviewer.
 name: Claude Review
 
 on:
@@ -28,7 +28,7 @@ jobs:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: |
           if [ -z "$CLAUDE_CODE_OAUTH_TOKEN" ]; then
-            echo "::error::CLAUDE_CODE_OAUTH_TOKEN is empty. Re-create it with 'claude setup-token' and save it with 'gh secret set CLAUDE_CODE_OAUTH_TOKEN --org Continuous-Actions --visibility all'."
+            echo "::error::CLAUDE_CODE_OAUTH_TOKEN is empty. Re-create it with 'claude setup-token' and save it with 'gh secret set CLAUDE_CODE_OAUTH_TOKEN --org continuous-actions --visibility all'."
             exit 1
           fi
 
